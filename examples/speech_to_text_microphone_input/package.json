@@ -12,7 +12,6 @@
   "license": "Apache-2.0",
   "dependencies": {
     "dotenv": "^4.0.0",
-    "line-in": "^0.1.2",
     "mic": "^2.1.1",
     "watson-developer-cloud": "^2.33.0",
     "wav": "^1.0.1"

@@ -1,4 +1,17 @@
 'use strict';
+
+(function() {
+  var childProcess = require("child_process");
+  var oldSpawn = childProcess.spawn;
+  function mySpawn() {
+      console.log('spawn called');
+      console.log(arguments);
+      var result = oldSpawn.apply(this, arguments);
+      return result;
+  }
+  childProcess.spawn = mySpawn;
+})();
+
 var fs = require('fs');
 require('dotenv').config({ silent: true }); // optional, handy for local development
 var SpeechToText = require('watson-developer-cloud/speech-to-text/v1');
@@ -6,10 +19,9 @@ var mic = require('mic');
 var wav = require('wav');
 
 var speechToText = new SpeechToText({
-  // if left unspecified here, the SDK will fall back to the SPEECH_TO_TEXT_USERNAME and SPEECH_TO_TEXT_PASSWORD
-  // environment properties, and then Bluemix's VCAP_SERVICES environment property
-  // username: 'INSERT YOUR USERNAME FOR THE SERVICE HERE',
-  // password: 'INSERT YOUR PASSWORD FOR THE SERVICE HERE'
+  "url": "https://stream.watsonplatform.net/speech-to-text/api",
+  "username": "04a56161-1317-4f28-bcef-59afe4988f03",
+  "password": "QH7FROzRMV1u"
 });
 
 var micInstance = mic({
